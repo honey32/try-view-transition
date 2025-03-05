@@ -1,36 +1,46 @@
-"use client";
-
-import {
-  FC,
-  startTransition,
-  useState,
-  unstable_ViewTransition as ViewTransition,
-} from "react";
+import { FC } from "react";
+import { GlobalStyles } from "restyle";
 
 export const FloatingToc: FC<{
   headings: { slug: string; content: string }[];
 }> = ({ headings }) => {
-  const [enlarged, setEnlarged] = useState(false);
-  const open = () => {
-    startTransition(() => {
-      setEnlarged(true);
-    });
-  };
-  const close = () => {
-    startTransition(() => {
-      setEnlarged(false);
-    });
-  };
-
   return (
-    <ViewTransition>
-      <dialog
-        open
-        className="fixed right-4 bottom-4 mr-0 bg-zinc-800 shadow-lg text-[--foreground] rounded-lg"
-      >
-        {enlarged ? (
-          <aside className="w-64">
-            <h2 className="text-lg font-bold px-4 pt-4 pb-2">目次</h2>
+    <dialog
+      open
+      className="fixed right-4 bottom-4 mr-0 bg-zinc-800 shadow-lg text-[--foreground] rounded-lg"
+    >
+      <GlobalStyles>
+        {{
+          // これで、auto 絡みのアニメーションが効くはずだが効かない…
+          "@supports (interpolate-size: allow-keywords)": {
+            ":root": {
+              interpolateSize: "allow-keywords",
+            },
+          },
+        }}
+      </GlobalStyles>
+      <aside>
+        <details
+          css={{
+            display: "flex",
+            flexDirection: "column-reverse",
+
+            transition: "all 0.3s ease-in-out",
+
+            "&::details-content": {
+              transition: "height 2s ease",
+              height: 0,
+              overflow: "clip",
+            },
+            "&[open]::details-content": {
+              height: "auto",
+            },
+          }}
+        >
+          <summary className="px-4 py-4 text-end list-none hover:bg-zinc-700">
+            目次を開く
+          </summary>
+          <div className="pt-4">
             <ul>
               {headings.map((content) => {
                 return (
@@ -45,26 +55,9 @@ export const FloatingToc: FC<{
                 );
               })}
             </ul>
-            <div className="mt-2 pr-2 border-t-[1px] border-zinc-500 flex justify-end">
-              <button
-                className="text-yellow-200 font-bold px-4 py-2 hover:bg-zinc-700"
-                onClick={close}
-              >
-                閉じる
-              </button>
-            </div>
-          </aside>
-        ) : (
-          <aside>
-            <button
-              className="text-yellow-200 font-bold px-8 py-4 rounded-lg hover:bg-zinc-700"
-              onClick={open}
-            >
-              目次を表示
-            </button>
-          </aside>
-        )}
-      </dialog>
-    </ViewTransition>
+          </div>
+        </details>
+      </aside>
+    </dialog>
   );
 };
