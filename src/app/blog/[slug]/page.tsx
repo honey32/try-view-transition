@@ -73,22 +73,31 @@ export default async function BlogPostPage({
             {dateFormatter.format(article.createdAt)}
           </p>
 
-          <div
-            className="mt-8"
-            css={{
-              "& *:where(h2, p)": {
-                marginBlock: "1rem",
-              },
-
-              "& *:where(h2)": {
-                fontSize: "1.5rem",
-              },
-            }}
-          >
-            <div
-              className="prose leading-8"
-              dangerouslySetInnerHTML={{ __html: article.content }}
-            />
+          <div className="mt-8">
+            <div className="prose leading-8">
+              {article.content.map((content) => {
+                switch (content.type) {
+                  case "paragraph": {
+                    return (
+                      <p key={content.content} className="leading-8 my-4">
+                        {content.content}
+                      </p>
+                    );
+                  }
+                  case "heading": {
+                    return (
+                      <h2
+                        className="text-2xl font-bold my-8"
+                        key={content.slug}
+                        id={content.slug}
+                      >
+                        {content.content}
+                      </h2>
+                    );
+                  }
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>
