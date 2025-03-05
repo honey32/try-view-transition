@@ -6,6 +6,37 @@ import {
   startTransition,
 } from "react";
 import { Dialog } from "./dialog";
+import { GlobalStyles, keyframes } from "restyle";
+
+const SlideInKeyFrames = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translateY(50%)",
+  },
+  "50%": {
+    opacity: 0,
+    transform: "translateY(25%)",
+  },
+  to: {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+});
+
+const SlideOutKeyFrames = keyframes({
+  from: {
+    opacity: 1,
+    transform: "translateY(0)",
+  },
+  "50%": {
+    opacity: 0,
+    transform: "translateY(25%)",
+  },
+  to: {
+    opacity: 0,
+    transform: "translateY(50%)",
+  },
+});
 
 export default function ModalPage() {
   const [text, setText] = useState("");
@@ -47,12 +78,27 @@ export default function ModalPage() {
         <p>Last Return Value: {dialogLastReturnValue}</p>
       </div>
 
-      <ViewTransition>
+      <SlideInKeyFrames />
+      <SlideOutKeyFrames />
+      <GlobalStyles>
+        {{
+          "::view-transition-new(modal-dialog)": {
+            animation: `${SlideInKeyFrames} 0.2s ease-out`,
+          },
+          // なぜか、消えるときのアニメーションは上手くいかない…
+          "::view-transition-old(modal-dialog)": {
+            animation: `${SlideOutKeyFrames} 0.2s ease-in`,
+          },
+        }}
+      </GlobalStyles>
+
+      <ViewTransition name="modal-dialog">
         <Dialog
           modal
           open={dialogState !== undefined}
           className="p-8 rounded-lg bg-gray-800 backdrop:bg-black/50"
           onClose={(e) => {
+            console.log("onClose");
             startTransition(() => {
               setDialogState(undefined);
               setDialogLastReturnValue(e.currentTarget.returnValue);
