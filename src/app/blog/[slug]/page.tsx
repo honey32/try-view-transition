@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { articles } from "../articles.data";
 import { transitionNames } from "../transitions";
+import { FloatingToc } from "./floating-toc";
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
   year: "numeric",
@@ -87,7 +88,7 @@ export default async function BlogPostPage({
                   case "heading": {
                     return (
                       <h2
-                        className="text-2xl font-bold my-8"
+                        className="text-2xl font-bold mt-16 mb-8"
                         key={content.slug}
                         id={content.slug}
                       >
@@ -101,6 +102,15 @@ export default async function BlogPostPage({
           </div>
         </div>
       </div>
+
+      <FloatingToc
+        headings={article.content
+          .filter((c) => c.type === "heading")
+          .map((content) => ({
+            slug: content.slug,
+            content: content.content,
+          }))}
+      />
     </div>
   );
 }
