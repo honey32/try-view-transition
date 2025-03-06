@@ -56,7 +56,16 @@ export default async function BlogPostPage({ params }: Props) {
             </ViewTransition>
           </div>
 
-          <div className="grid content-center gap-2">
+          <div
+            className="grid content-center gap-2"
+            css={{
+              opacity: 1,
+              transition: "opacity 0.5s 0.2s ease-out",
+              "@starting-style": {
+                opacity: 0,
+              },
+            }}
+          >
             <Breadcrumbs
               items={[
                 { href: "/", label: "HOME" },
