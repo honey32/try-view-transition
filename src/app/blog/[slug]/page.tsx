@@ -7,6 +7,30 @@ import { articles } from "../articles.data";
 import { transitionNames } from "../transitions";
 import { FloatingToc } from "./floating-toc";
 import { Breadcrumbs } from "./breadcrumbs";
+import { Metadata } from "next";
+
+type Article = (typeof articles)[number];
+
+const findArticleOrNotFound = async (slug: string): Promise<Article> => {
+  const article = articles.find((article) => article.slug === slug);
+  if (!article) notFound();
+  return article;
+};
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const { slug } = await params;
+  const article = await findArticleOrNotFound(slug);
+
+  return {
+    title: article.title,
+    description: article.content
+      .map((content) => content.content)
+      .join("")
+      .substring(0, 120),
+  };
+};
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
   year: "numeric",
@@ -20,8 +44,7 @@ type Props = {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const article = articles.find((article) => article.slug === slug);
-  if (!article) notFound();
+  const article = await findArticleOrNotFound(slug);
 
   return (
     <div className="px-8 container mx-auto md py-8 gap-8">

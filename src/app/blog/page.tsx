@@ -4,6 +4,12 @@ import Link from "next/link";
 
 import { articles } from "./articles.data";
 import { transitionNames } from "./transitions";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Blog",
+};
 
 const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
   year: "numeric",
