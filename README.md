@@ -1,37 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
 ## 検証の内容について
+
+[React に新しく導入される View Transition コンポーネント](https://github.com/facebook/react/pull/31975) の動作検証。
 
 - モーダル
   - モーダルダイアログの開閉に ViewTransition を適用できるかの検証
 - ブログ
   - 一覧ページと詳細ページ間の Container Transform 的なアニメーションの動作検証
+  - Next.js の `<Link/>` による画面遷移が React の Transition 機能を使っているので、素で ViewTransition を発生させることが可能
 
-## Learn More
+## 動作確認の方法
 
-To learn more about Next.js, take a look at the following resources:
+以下のコマンドで dev サーバーを立ち上げて、
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いて動作を確認できます。
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`app/(home)/page.tsx` を編集することでページの内容を変更できます。ファイルを編集すると自動的に更新されます。
