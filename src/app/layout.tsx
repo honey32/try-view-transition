@@ -18,8 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="antialiased">
+      {/* スクロールバーを表示しっぱなしにして、ページ間の見え方を統一する */}
+      <body className="antialiased min-h-[calc(100vh+1rem)]">
         {children}
+        <div aria-hidden="true" className="h-[72px]"></div>
         <NavBar />
       </body>
     </html>
