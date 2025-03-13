@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { articles } from "./articles.data";
-import { transitionNames } from "./transitions";
+import { transitionNames } from "../transitions";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function BlogPage() {
           >
             <div className="aspect-square relative w-40">
               <ViewTransition
-                name={transitionNames.postThumbnailImage(article.slug)}
+                name={transitionNames.blog.postThumbnailImage(article.slug)}
               >
                 <Image src={article.image} alt="" fill />
               </ViewTransition>

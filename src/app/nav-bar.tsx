@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FC, unstable_ViewTransition as ViewTransition } from "react";
+import { transitionNames } from "./transitions";
 
 const items = [
   {
@@ -39,7 +40,7 @@ export const NavBar: FC = () => {
                 className="group relative grid px-6 py-6 place-items-center"
               >
                 {isActive && (
-                  <ViewTransition name="global-navbar-indicator">
+                  <ViewTransition name={transitionNames.navbar.indicator}>
                     <div className="-z-10 absolute inset-2 bg-sky-900 rounded-3xl"></div>
                   </ViewTransition>
                 )}

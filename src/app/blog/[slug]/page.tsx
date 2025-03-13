@@ -4,7 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { articles } from "../articles.data";
-import { transitionNames } from "../transitions";
+import { transitionNames } from "../../transitions";
 import { FloatingToc } from "./floating-toc";
 import { Breadcrumbs } from "./breadcrumbs";
 import { Metadata } from "next";
@@ -51,7 +51,9 @@ export default async function BlogPostPage({ params }: Props) {
       <article className="bg-zinc-900 p-4 rounded-lg">
         <header className="grid grid-cols-[200px_minmax(0,1fr)]">
           <div className="aspect-square relative grid place-items-center">
-            <ViewTransition name={transitionNames.postThumbnailImage(slug)}>
+            <ViewTransition
+              name={transitionNames.blog.postThumbnailImage(slug)}
+            >
               <Image src={article.image} alt={article.title} height={240} />
             </ViewTransition>
           </div>
