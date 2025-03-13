@@ -35,7 +35,8 @@ export const NavBar: FC = () => {
               <Link
                 href={item.href}
                 key={item.href}
-                className="relative grid px-6 py-6 place-items-center text-transparent hover:text-sky-950"
+                data-active={isActive || undefined}
+                className="group relative grid px-6 py-6 place-items-center"
               >
                 {isActive && (
                   <ViewTransition name="global-navbar-indicator">
@@ -44,12 +45,10 @@ export const NavBar: FC = () => {
                 )}
 
                 {!isActive && (
-                  <div className="-z-10 absolute inset-2 bg-[currentColor] rounded-3xl"></div>
+                  <div className="-z-10 absolute inset-2 rounded-3xl group-hover:bg-sky-950"></div>
                 )}
 
-                <span
-                  className={`inline-block ${isActive ? "text-blue-100" : "text-gray-400 hover:text-blue-100"} `}
-                >
+                <span className="inline-block text-gray-600 group-data-active:text-blue-100 group-hover:text-blue-100">
                   {item.label}
                 </span>
               </Link>
