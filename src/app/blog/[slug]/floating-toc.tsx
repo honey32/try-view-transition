@@ -7,7 +7,7 @@ export const FloatingToc: FC<{
   return (
     <dialog
       open
-      className="fixed right-4 bottom-4 mr-0 bg-zinc-800 shadow-lg text-[--foreground] rounded-lg"
+      className="fixed right-4 bottom-4 mr-0 bg-zinc-800 shadow-lg text-(--foreground) rounded-lg"
     >
       <GlobalStyles>
         {{

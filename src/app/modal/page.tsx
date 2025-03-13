@@ -58,7 +58,7 @@ export default function ModalPage() {
           onChange={(e) => setText(e.target.value)}
           type="text"
           placeholder="Enter some text..."
-          className="w-full max-w-md px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent"
+          className="w-full max-w-md px-4 py-2 mb-4 border rounded-lg focus:outline-hidden focus:ring-2 focus:ring-blue-500 bg-transparent"
         />
       </div>
 
@@ -70,7 +70,7 @@ export default function ModalPage() {
             });
           }}
           disabled={dialogState !== undefined}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition disabled:bg-slate-500"
+          className="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600 transition disabled:bg-slate-500"
         >
           Open Modal
         </button>
@@ -123,14 +123,14 @@ export default function ModalPage() {
               <button
                 type="submit"
                 value="cancel"
-                className="px-4 py-2 text-white rounded hover:bg-gray-700 transition"
+                className="px-4 py-2 text-white rounded-sm hover:bg-gray-700 transition"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 value="ok"
-                className="px-4 py-2 bg-teal-800 text-white rounded hover:bg-teal-700 transition"
+                className="px-4 py-2 bg-teal-800 text-white rounded-sm hover:bg-teal-700 transition"
               >
                 OK, Proceed
               </button>

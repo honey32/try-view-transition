@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="px-8 container mx-auto md py-8 gap-8">
       <article className="bg-zinc-900 p-4 rounded-lg">
-        <header className="grid grid-cols-[200px_minmax(0,_1fr)]">
+        <header className="grid grid-cols-[200px_minmax(0,1fr)]">
           <div className="aspect-square relative grid place-items-center">
             <ViewTransition name={transitionNames.postThumbnailImage(slug)}>
               <Image src={article.image} alt={article.title} height={240} />
