@@ -96,7 +96,7 @@ export default function ModalPage() {
         <Dialog
           modal
           open={dialogState !== undefined}
-          className="p-8 rounded-lg bg-gray-800 backdrop:bg-black/50"
+          className="p-8 rounded-lg bg-gray-800 backdrop:bg-black/50 m-auto"
           onClose={(e) => {
             console.log("onClose");
             startTransition(() => {
